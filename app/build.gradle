@@ -5,9 +5,32 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+
+    def keystorePropertiesFile = rootProject.file("keystore.properties")
+
+    signingConfigs {
+        if(!keystorePropertiesFile.exists()){
+            config {
+                storeFile file(System.getenv("KEYSTORE"))
+                storePassword System.getenv("KEYSTORE_PASSWORD")
+                keyAlias System.getenv("KEY_ALIAS")
+                keyPassword System.getenv("KEY_PASSWORD")
+            }
+        }else{
+            def keystoreProperties = new Properties()
+            keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+            config {
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+            }
+        }
+    }
+
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.hakansu.cifma"
+        applicationId "com"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -15,9 +38,45 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+        }
+
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "test"
+    productFlavors {
+        all {
+            flavor -> sourceSets[flavor.name].setRoot("src/flavors/${flavor.name}")
+        }
+        flavor1 {
+            dimension "test"
+            applicationIdSuffix ".heyyo.flavor1"
+            resValue "string", "app_name", "Flavor 1"
+        }
+        flavor2 {
+            dimension "test"
+            applicationIdSuffix ".woow.flavor2"
+            resValue "string", "app_name", "Flavor 2"
+        }
+        flavor2 {
+            dimension "test"
+            applicationIdSuffix ".hohoho.flavor3"
+            resValue "string", "app_name", "Flavor 3"
+        }
+    }
+
+    variantFilter { variant ->
+        def names = variant.flavors*.name
+        if (variant.buildType.name == 'debug' && !names.contains("flavor1")) {
+            setIgnore(true)
+        }
+        if (variant.buildType.name == 'release' && names.contains("flavor3")) {
+            setIgnore(true)
         }
     }
 }
@@ -25,10 +84,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
     implementation 'androidx.core:core-ktx:1.1.0-alpha04'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+    androidTestImplementation 'androidx.test:runner:1.1.2-alpha01'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.2-alpha01'
 }

@@ -1,0 +1,33 @@
+
+
+    lane :flavor1Supply do
+
+        gradle(
+            task: 'assemble',
+            flavor: 'flavor1',
+            build_type: 'dev'
+         )
+
+        upload_to_play_store(
+          package_name: 'com.heyyo.flavor1',
+          track: 'rollout',
+          metadata_path: 'app/src/flavors/flavor1/metadata',
+          json_key: 'app/src/flavors/home2nite/flavor1_key.json'
+        )
+    end
+
+    lane :flavor2Supply do
+
+        gradle(
+            task: 'assemble',
+            flavor: 'flavor2',
+            build_type: 'release'
+         )
+
+        upload_to_play_store(
+          package_name: 'com.woow.flavor2',
+          track: 'rollout',
+          metadata_path: 'app/src/flavors/flavor2/metadata',
+          json_key: 'app/src/flavors/flavor2/flavor2_key.json'
+        )
+    end

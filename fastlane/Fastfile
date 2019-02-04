@@ -1,0 +1,40 @@
+default_platform(:android)
+
+import("Fastrelease")
+import("Fastbeta")
+
+ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
+
+
+
+    lane :allbetas do
+         flavor1Beta
+         flavor2Beta
+    end
+
+    lane :allReleases do
+         flavor1Supply
+         flavor2Supply
+    end
+
+
+    lane :successSlack do |values|
+        slack(
+            message: values[:message],
+            success: true,
+            default_payloads: [:lane],
+            payload: {"Platform" => "Android",
+                      "Date" => Time.new.to_s}
+              )
+    end
+
+
+    error do |lane, exception|
+        slack(
+            message: exception.to_s,
+            success: false,
+            default_payloads: [:lane],
+            payload: {"Platform" => "Android",
+            "Date" => Time.new.to_s}
+        )
+    end

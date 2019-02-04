@@ -1,0 +1,25 @@
+ENV["CRASHLYTICS_API_TOKEN"] = "yourApiToken"
+ENV["CRASHLYTICS_BUILD_SECRET"] = "crashlyticsBuildSecret"
+ENV["CRASHLYTICS_NOTES_PATH"] = "fastlane/crashlytics_release_notes.txt"
+
+    lane :flavor1Beta do
+        gradle(
+            task: 'assemble',
+            flavor: "webeeHotel",
+            build_type: 'dev'
+        )
+        crashlytics(
+          groups: ["done-testers"]
+        )
+    end
+
+    lane :flavor2Beta do
+        gradle(
+          task: 'assemble',
+          flavor: "home2nite",
+          build_type: 'dev'
+        )
+        crashlytics(
+          groups: ["done-testers"]
+        )
+    end
