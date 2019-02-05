@@ -5,7 +5,12 @@ jobs:
     branches:
       only:
       - beta
-      - release
+      - master
+
+
+
+
+
     docker:
     - image: circleci/android:api-28-alpha
     environment:
