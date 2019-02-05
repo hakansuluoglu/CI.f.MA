@@ -38,6 +38,7 @@ jobs:
         if [[ "${CIRCLE_BRANCH}" == "release" ]] then
         bundle exec fastlane RELEASE_FASTLANE_LANE
 
+
     - store_artifacts:
         path: output
 
