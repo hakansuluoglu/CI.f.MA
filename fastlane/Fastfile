@@ -3,18 +3,33 @@ default_platform(:android)
 import("Fastrelease")
 import("Fastbeta")
 
-ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
+ENV["SLACK_URL"] = "https://hooks.slack.com/services/yourincomingwebhookurl"
 
 
+    lane :test |values| do
+         gradle(
+                task:  values[:task],
+                flavor: "flavor1",
+                build_type: 'release'
+            )
+    end
 
     lane :allbetas do
+         test( task: 'flavor1')
          flavor1Beta
+         test( task: 'flavor2')
          flavor2Beta
+
+         successSlack("HEYYYYOOOOOO")
     end
 
     lane :allReleases do
+         test( task: 'flavor1')
          flavor1Supply
+         test( task: 'flavor2')
          flavor2Supply
+
+         successSlack("HEYYYYOOOOOO")
     end
 
 

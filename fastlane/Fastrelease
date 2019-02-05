@@ -24,7 +24,7 @@
             build_type: 'release'
          )
 
-        upload_to_play_store(
+        supply(
           package_name: 'com.woow.flavor2',
           track: 'rollout',
           metadata_path: 'app/src/flavors/flavor2/metadata',
