@@ -32,11 +32,7 @@ jobs:
 
     - run:
         name: fastlane
-        command: |
-        if [[ "${CIRCLE_BRANCH}" == "beta" ]] then
-        bundle exec fastlane BETA_FASTLANE_LANE
-        if [[ "${CIRCLE_BRANCH}" == "release" ]] then
-        bundle exec fastlane RELEASE_FASTLANE_LANE
+        command: bundle exec fastlane BETA_FASTLANE_LANE
 
 
     - store_artifacts:
