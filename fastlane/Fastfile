@@ -8,25 +8,25 @@ ENV["SLACK_URL"] = "https://hooks.slack.com/services/yourincomingwebhookurl"
 
     lane :test do |values|
          gradle(
-                task:  values[:task],
-                flavor: "flavor1",
+                task:  test,
+                flavor: values[:flavor],
                 build_type: 'release'
             )
     end
 
     lane :allbetas do
-         test( task: 'flavor1')
+         test( flavor: 'flavor1')
          flavor1Beta
-         test( task: 'flavor2')
+         test( flavor: 'flavor2')
          flavor2Beta
 
          successSlack("HEYYYYOOOOOO")
     end
 
     lane :allReleases do
-         test( task: 'flavor1')
+         test( flavor: 'flavor1')
          flavor1Supply
-         test( task: 'flavor2')
+         test( flavor: 'flavor2')
          flavor2Supply
 
          successSlack("HEYYYYOOOOOO")
