@@ -6,7 +6,7 @@ import("Fastbeta")
 ENV["SLACK_URL"] = "https://hooks.slack.com/services/yourincomingwebhookurl"
 
 
-    lane :test |values| do
+    lane :test do |values|
          gradle(
                 task:  values[:task],
                 flavor: "flavor1",
