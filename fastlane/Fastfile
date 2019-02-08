@@ -8,7 +8,7 @@ ENV["SLACK_URL"] = "https://hooks.slack.com/services/yourincomingwebhookurl"
 
     lane :test do |values|
          gradle(
-                task: test,
+                task: 'test',
                 flavor: values[:flavor],
                 build_type: 'release'
             )
