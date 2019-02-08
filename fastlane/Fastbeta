@@ -20,6 +20,6 @@ ENV["CRASHLYTICS_NOTES_PATH"] = "fastlane/crashlytics_release_notes.txt"
           build_type: 'dev'
         )
         crashlytics(
-          email: ["example1@mail.com",example2@mail.com]
+          email: ["example1@mail.com","example2@mail.com"]
         )
     end
