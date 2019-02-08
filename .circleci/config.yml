@@ -34,7 +34,7 @@ jobs:
 
     - run:
         name: fastlane
-        command: bundle exec fastlane BETA_FASTLANE_LANE
+        command: bundle exec fastlane $BETA_FASTLANE_LANE
 
 
     - store_artifacts:
