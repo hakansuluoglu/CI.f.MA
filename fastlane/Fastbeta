@@ -6,7 +6,7 @@ ENV["CRASHLYTICS_NOTES_PATH"] = "fastlane/crashlytics_release_notes.txt"
         gradle(
             task: 'assemble',
             flavor: "Flavor1",
-            build_type: 'dev'
+            build_type: 'release'
         )
         crashlytics(
           groups: ["your-crashlytics-group"]
@@ -17,7 +17,7 @@ ENV["CRASHLYTICS_NOTES_PATH"] = "fastlane/crashlytics_release_notes.txt"
         gradle(
           task: 'assemble',
           flavor: "Flavor2",
-          build_type: 'dev'
+          build_type: 'release'
         )
         crashlytics(
           email: ["example1@mail.com","example2@mail.com"]
