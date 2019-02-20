@@ -4,15 +4,14 @@ jobs:
   build:
     branches:
       only:
-      - beta
+      - develop
       - master
-
 
     docker:
     - image: circleci/android:api-28-alpha
     environment:
       JVM_OPTS: -Xmx3200m
-      FASTLANE_LANE: allbetas
+      FASTLANE_LANE: allReleases
 
     steps:
     - checkout
