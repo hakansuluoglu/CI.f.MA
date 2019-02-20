@@ -34,9 +34,12 @@ jobs:
     - run:
         name: fastlane
         command: |
-         if [ "${CIRCLE_BRANCH}" == "master" ]; then
-         bundle exec fastlane $BETA_FASTLANE_LANE
-         fi
+          if [ "${CIRCLE_BRANCH}" == "master" ]; then
+          bundle exec fastlane $RELEASE_FASTLANE_LANE
+          fi
+          if [ "${CIRCLE_BRANCH}" == "develop" ]; then
+          bundle exec fastlane $BETA_FASTLANE_LANE
+          fi
 
     - store_artifacts:
         path: output
