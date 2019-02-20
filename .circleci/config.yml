@@ -34,7 +34,7 @@ jobs:
     - run:
         name: fastlane
         command: |
-          export fastlane= if [[$CIRCLE_BRANCH=="develop"]] then "bundle exec fastlane $BETA_FASTLANE_LANE" else "bundle exec fastlane $RELEASE_FASTLANE_LANE" fi
+          export fastlane= if [[$CIRCLE_BRANCH -eq "develop"]] then "bundle exec fastlane $BETA_FASTLANE_LANE" else "bundle exec fastlane $RELEASE_FASTLANE_LANE" fi
           echo $fastlane
 
     - store_artifacts:
