@@ -35,7 +35,7 @@ jobs:
         name: fastlane
         command: |
                  if [ "${CIRCLE_BRANCH}" == "master" ]; then
-       "bundle exec fastlane $BETA_FASTLANE_LANE"
+                     "bundle exec fastlane $BETA_FASTLANE_LANE"
                   fi
 
 
