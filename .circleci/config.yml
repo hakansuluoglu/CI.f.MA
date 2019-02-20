@@ -11,7 +11,7 @@ jobs:
     - image: circleci/android:api-28-alpha
     environment:
       JVM_OPTS: -Xmx3200m
-      BETA_FASTLANE_LANE: if[$CIRCLE_BRANCH=="develop"] then allbetas else bundle exec fastlane allReleases fi
+      BETA_FASTLANE_LANE: allBetas
       RELEASE_FASTLANE_LANE: allReleases
 
     steps:
@@ -33,7 +33,9 @@ jobs:
 
     - run:
         name: fastlane
-        command: bundle exec fastlane $BETA_FASTLANE_LANE
+        command: |
+          export fastlane= if [$CIRCLE_BRANCH=="develop"] then "bundle exec fastlane $BETA_FASTLANE_LANE" else "bundle exec fastlane $RELEASE_FASTLANE_LANE" fi
+          echo $fastlane
 
     - store_artifacts:
         path: output
