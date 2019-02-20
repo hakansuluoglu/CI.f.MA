@@ -4,15 +4,15 @@ jobs:
   build:
     branches:
       only:
-      - beta
+      - develop
       - master
-
 
     docker:
     - image: circleci/android:api-28-alpha
     environment:
       JVM_OPTS: -Xmx3200m
-      FASTLANE_LANE: allbetas
+      BETA_FASTLANE_LANE: allBetas
+      RELEASE_FASTLANE_LANE: allReleases
 
     steps:
     - checkout
@@ -33,7 +33,13 @@ jobs:
 
     - run:
         name: fastlane
-        command: bundle exec fastlane $FASTLANE_LANE
+        command: |
+         if [ "${CIRCLE_BRANCH}" == "master" ]; then
+         bundle exec fastlane $BETA_FASTLANE_LANE
+         fi
+         if [ "${CIRCLE_BRANCH}" == "develop" ]; then
+         bundle exec fastlane $RELEASE_FASTLANE_LANE
+         fi
 
 
     - store_artifacts:
