@@ -3,7 +3,7 @@ lane :orangeSupply do
     gradle(
         task: 'assemble',
         flavor: 'orangeLive',
-        build_type: 'dev'
+        build_type: 'release'
      )
 
     upload_to_play_store(
