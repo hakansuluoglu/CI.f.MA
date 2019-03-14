@@ -15,19 +15,20 @@ ENV["SLACK_URL"] = "https://hooks.slack.com/services/yourincomingwebhookurl"
     end
 
     lane :allbetas do
-         test( flavor: 'Flavor1')
+         test( flavor: 'appleDev')
          flavor1Beta
-         test( flavor: 'Flavor2')
+         test( flavor: 'orangeDev')
          flavor2Beta
 
          successSlack("HEYYYYOOOOOO")
     end
 
     lane :allReleases do
-         test( flavor: 'Flavor1')
-         flavor1Supply
-         test( flavor: 'Flavor2')
-         flavor2Supply
+         test( flavor: 'appleLive')
+         orangeSupply
+         test( flavor: 'orangeLive')
+         appleSupply
+
          successSlack("HEYYYYOOOOOO")
     end
 

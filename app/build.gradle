@@ -40,12 +40,6 @@ android {
             minifyEnabled false
         }
 
-        dev {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
-        }
-
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -53,23 +47,31 @@ android {
         }
     }
 
-    flavorDimensions "client"
+    flavorDimensions "client","server"
     productFlavors {
+
+        /*
+        all {
+            flavor -> sourceSets[flavor.name].setRoot("src/flavors/${flavor.name}")
+        }
+        */
         apple {
             dimension "client"
             applicationIdSuffix ".apple"
             resValue "string", "app_name", "Apple"
         }
-
         orange {
             dimension "client"
             applicationIdSuffix ".orange"
             resValue "string", "app_name", "Orange"
         }
-        banana {
-            dimension "client"
-            applicationIdSuffix ".banana"
-            resValue "string", "app_name", "Banana"
+
+        dev {
+            dimension "server"
+            applicationIdSuffix ".dev"
+        }
+        live {
+            dimension "server"
         }
     }
 

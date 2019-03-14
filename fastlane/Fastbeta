@@ -2,10 +2,10 @@ ENV["CRASHLYTICS_API_TOKEN"] = "yourApiToken"
 ENV["CRASHLYTICS_BUILD_SECRET"] = "yourcrashlyticsBuildSecret"
 ENV["CRASHLYTICS_NOTES_PATH"] = "fastlane/crashlytics_release_notes.txt"
 
-    lane :flavor1Beta do
+    lane :AppleBeta do
         gradle(
             task: 'assemble',
-            flavor: "Flavor1",
+            flavor: "AppleDev",
             build_type: 'release'
         )
         crashlytics(
@@ -13,10 +13,10 @@ ENV["CRASHLYTICS_NOTES_PATH"] = "fastlane/crashlytics_release_notes.txt"
         )
     end
 
-    lane :flavor2Beta do
+    lane :OrangeBeta do
         gradle(
           task: 'assemble',
-          flavor: "Flavor2",
+          flavor: "orangeDev",
           build_type: 'release'
         )
         crashlytics(
