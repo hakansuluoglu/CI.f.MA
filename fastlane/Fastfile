@@ -28,11 +28,6 @@ ENV["SLACK_URL"] = "https://hooks.slack.com/services/yourincomingwebhookurl"
          flavor1Supply
          test( flavor: 'Flavor2')
          flavor2Supply
-
-
-
-
-
          successSlack("HEYYYYOOOOOO")
     end
 
