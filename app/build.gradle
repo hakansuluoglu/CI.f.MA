@@ -40,6 +40,12 @@ android {
             minifyEnabled false
         }
 
+        dev {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -47,42 +53,29 @@ android {
         }
     }
 
-    flavorDimensions "client","server"
+    flavorDimensions "client"
     productFlavors {
-        all {
-            flavor -> sourceSets[flavor.name].setRoot("src/flavors/${flavor.name}")
-        }
-        flavor1 {
+        apple {
             dimension "client"
-            applicationIdSuffix ".flavor1"
-            resValue "string", "app_name", "Flavor 1"
-        }
-        flavor2 {
-            dimension "client"
-            applicationIdSuffix ".flavor2"
-            resValue "string", "app_name", "Flavor 2"
-        }
-        flavor3 {
-            dimension "client"
-            applicationIdSuffix ".flavor3"
-            resValue "string", "app_name", "Flavor 3"
+            applicationIdSuffix ".apple"
+            resValue "string", "app_name", "Apple"
         }
 
-        staging {
-            dimension "server"
-            applicationIdSuffix ".staging"
+        orange {
+            dimension "client"
+            applicationIdSuffix ".orange"
+            resValue "string", "app_name", "Orange"
         }
-        prod {
-            dimension "server"
+        banana {
+            dimension "client"
+            applicationIdSuffix ".banana"
+            resValue "string", "app_name", "Banana"
         }
     }
 
     variantFilter { variant ->
         def names = variant.flavors*.name
-        if (variant.buildType.name == 'debug' && !names.contains("flavor1")) {
-            setIgnore(true)
-        }
-        if (variant.buildType.name == 'release' && names.contains("staging")) {
+        if (variant.buildType.name == 'debug' && !names.contains("apple")) {
             setIgnore(true)
         }
     }
